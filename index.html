@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Celebration | Psalm 27:4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: #fff;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            background: rgba(15, 15, 15, 0.9);
+        }
+
+        .main-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #FF6B6B);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite, textFloat 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .verse-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .verse {
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: versePulse 3s infinite;
+        }
+
+        @keyframes versePulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
+
+        .verse-reference {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #4ECDC4;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+        }
+
+        .celebration-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebration-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Balloon Animation Styles */
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: floatUp var(--float-duration) ease-in infinite;
+            z-index: 1;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 2px;
+            height: 20px;
+            background: #ffffff;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(var(--rotation));
+                opacity: 0;
+            }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .main-text { font-size: 2.5rem; }
+            .verse { font-size: 1.2rem; }
+            .verse-reference { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-text">Celebrating Life's Purpose</h1>
+        <div class="verse-container">
+            <p class="verse">"One thing I ask from the LORD, this only do I seek: that I may dwell in the house of the LORD all the days of my life, to gaze on the beauty of the LORD and to seek him in his temple."</p>
+            <p class="verse-reference">Psalm 27:4</p>
+        </div>
+        <button class="celebration-button" onclick="celebrate()">Celebrate 🎉</button>
+    </div>
+
+    <script>
+        function createBalloon() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#FF8C94', '#7BC6CC'];
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            
+            // Random position
+            balloon.style.left = Math.random() * 100 + 'vw';
+            
+            // Random color
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random float duration and rotation
+            balloon.style.setProperty('--float-duration', (Math.random() * 5 + 5) + 's');
+            balloon.style.setProperty('--rotation', (Math.random() * 360) + 'deg');
+            
+            document.body.appendChild(balloon);
+            
+            // Remove balloon after animation
+            balloon.addEventListener('animationend', () => balloon.remove());
+        }
+
+        function celebrate() {
+            // Create multiple balloons
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createBalloon, i * 200);
+            }
+
+            // Create confetti
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 2000 + 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Create periodic balloons
+        setInterval(createBalloon, 3000);
+
+        // Initial celebration
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                for(let i = 0; i < 5; i++) {
+                    setTimeout(createBalloon, i * 300);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
